@@ -12,8 +12,8 @@ let birdY = boardHeight/2;
 let birdImg;
 
 let bird = {
-    X : birdX,
-    Y : birdY,
+    x : birdX,
+    y : birdY,
     width : birdWidth,
     height : birdHeight
 }
@@ -44,14 +44,14 @@ window.onload = function(){
      
     //drawing flappy bird
     context.fillStyle = "green";
-    context.fillRect(bird.X, bird.Y, bird.width, bird.height);
+    context.fillRect(bird.x, bird.y, bird.width, bird.height);
 
 
     //load images
     birdImg = new Image();
     birdImg.src = "images/flappybird.png";
     birdImg.onload = function(){
-        context.drawImage(birdImg, bird.X, bird.Y, bird.width, bird.height);
+        context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
     }
 
     topPipeImg = new Image();
@@ -75,8 +75,8 @@ function update(){
  // bird
     velocityY += gravity;
     //bird.Y += velocityY;
-    bird.Y = Math.max(bird.Y + velocityY, 0) //apply gravity to bird.y, limit the bird.y to top of the canvas
-    context.drawImage(birdImg, bird.X,bird.Y,bird.width,bird.height);
+    bird.y = Math.max(bird.y + velocityY, 0) //apply gravity to bird.y, limit the bird.y to top of the canvas
+    context.drawImage(birdImg, bird.x,bird.y,bird.width,bird.height);
  //pipes
  for(let i=0;i<pipeArray.length;i++){
     let pipe = pipeArray[i];
@@ -134,9 +134,9 @@ function moveBird(e){
 }
 
 function detectCollision(a,b) {
-    return a.X < b.X + b.width &&
-           a.X + a.width > b.X &&
-           a.Y < b.Y + b.height &&
-           a.Y + a.height > b.Y;
+    return a.x < b.x + b.width &&
+           a.x + a.width > b.x &&
+           a.y < b.y + b.height &&
+           a.y + a.height > b.y;
 
 }
