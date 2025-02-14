@@ -34,6 +34,7 @@ let velocityY = 0; // bird is not jumping, jumps in key press
 let gravity = 0.1;
 
 let gameOver = false;
+let score = 0;
  
 
 window.onload = function(){
@@ -67,26 +68,52 @@ window.onload = function(){
 
 function update(){
     requestAnimationFrame(update);
-    context.clearRect(0,0,board.width,board.height);
     if(gameOver){
         return;
     }
+    context.clearRect(0,0,board.width,board.height);
+    
 
  // bird
     velocityY += gravity;
     //bird.Y += velocityY;
     bird.y = Math.max(bird.y + velocityY, 0) //apply gravity to bird.y, limit the bird.y to top of the canvas
     context.drawImage(birdImg, bird.x,bird.y,bird.width,bird.height);
+
+    if(bird.y>board.height){ // if bird falls down the canvas
+        gameOver = true;
+    }
  //pipes
  for(let i=0;i<pipeArray.length;i++){
     let pipe = pipeArray[i];
     pipe.x += velocityX;
     context.drawImage(pipe.img,pipe.x,pipe.y,pipe.width,pipe.height);
 
+
+     if (!pipe.passed && pipe.img === bottomPipeImg && bird.x > pipe.x + pipeWidth) { //bird has not passed the pipe
+        score += 1; //because there are two pipes it becomes 1 
+        pipe.passed = true; // no double check
+
+     }
     if (detectCollision(bird,pipe)){
         gameOver = true;
 
     }
+ }
+
+ //clear pipes
+ while(pipeArray.length > 0 && pipeArray[0].x < -pipeWidth){
+    pipeArray.shift(); //removes first element from the array
+ }
+
+ //score 
+ context.fillStyle = "white";
+ context.font = "45px sans-serif";
+ context.fillText(score,5,45);
+
+ if(gameOver){
+    context.font = "45px Driod-Sans";
+    context.fillText("GAME OVER",30,350);
  }
 
 }
@@ -129,6 +156,13 @@ function moveBird(e){
     if(e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX"){
         //jump
         velocityY = -4;
+
+        if(gameOver){
+            bird.y = birdY;//reset the properties to default value
+            pipeArray = [];
+            score = 0;
+            gameOver = false;
+        }
     }
 
 }
