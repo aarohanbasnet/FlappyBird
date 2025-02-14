@@ -162,8 +162,11 @@ function placePipes() {
     pipeArray.push(bottomPipe);
 }
 
+document.addEventListener("keydown",moveBird);
+document.addEventListener("touchstart",moveBird);
+
 function moveBird(e){
-    if(e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX"){
+    if( e.type == "touchstart",e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX"){
         if(bgm.paused){
             bgm.play();
         };
