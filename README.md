@@ -1,11 +1,11 @@
 
 
- #🐦 Flappy Bird Clone
+ #🐦 Flappy Bird Clone 
 
 A simple Flappy Bird game built using JavaScript, HTML5 Canvas, and CSS while learning game development concepts like physics, collision detection, and event handling.
 
 
-**🎮 Features
+**🎮 Features**
 
 ✨ Smooth game physics (gravity, velocity, and collision detection)
 
@@ -19,7 +19,7 @@ A simple Flappy Bird game built using JavaScript, HTML5 Canvas, and CSS while le
 
 
 
-**🛠️ Technologies Used
+**🛠️ Technologies Used**
 
 JavaScript - Game logic and event handling
 
@@ -29,7 +29,7 @@ CSS - Basic styling
 
 
 
-**🚀 How to Play
+**🚀 How to Play**
 
 Press Space, Up Arrow, or X to make the bird jump.
 
